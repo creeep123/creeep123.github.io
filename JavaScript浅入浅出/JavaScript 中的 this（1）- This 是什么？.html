@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>为什么要使用 this ？ | 杨兄的博客</title>
+    <meta name="generator" content="VuePress 1.5.4">
+    <link rel="icon" href="/logo.png">
+    <meta name="description" content="个人技术指北">
+    <link rel="preload" href="/assets/css/0.styles.18bdc21d.css" as="style"><link rel="preload" href="/assets/js/app.87fe75b5.js" as="script"><link rel="preload" href="/assets/js/2.a701810a.js" as="script"><link rel="preload" href="/assets/js/5.7013faeb.js" as="script"><link rel="prefetch" href="/assets/js/10.ca5f7df5.js"><link rel="prefetch" href="/assets/js/11.29c857a5.js"><link rel="prefetch" href="/assets/js/12.b6d1b96e.js"><link rel="prefetch" href="/assets/js/13.dc04e67a.js"><link rel="prefetch" href="/assets/js/14.7d697598.js"><link rel="prefetch" href="/assets/js/15.c86a708e.js"><link rel="prefetch" href="/assets/js/3.11acdd8a.js"><link rel="prefetch" href="/assets/js/4.60651a5a.js"><link rel="prefetch" href="/assets/js/6.fb9270ea.js"><link rel="prefetch" href="/assets/js/7.be965ecd.js"><link rel="prefetch" href="/assets/js/8.efb1e9c8.js"><link rel="prefetch" href="/assets/js/9.b1dd579a.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.18bdc21d.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">杨兄的博客</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/前端面试题/" class="nav-link">
+  前端
+</a></div><div class="nav-item"><a href="/算法/" class="nav-link">
+  算法
+</a></div><div class="nav-item"><a href="/JavaScript浅入浅出/" class="nav-link">
+  JS
+</a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/前端面试题/" class="nav-link">
+  前端
+</a></div><div class="nav-item"><a href="/算法/" class="nav-link">
+  算法
+</a></div><div class="nav-item"><a href="/JavaScript浅入浅出/" class="nav-link">
+  JS
+</a></div> <!----></nav>  <ul class="sidebar-links"><li><a href="/JavaScript浅入浅出/JavaScript 中的 this（1）- This 是什么？.html" class="active sidebar-link">/JavaScript浅入浅出/JavaScript 中的 this（1）- This 是什么？.html</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/JavaScript浅入浅出/JavaScript 中的 this（1）- This 是什么？.html#为什么要使用-this" class="sidebar-link">为什么要使用 this ？</a></li><li class="sidebar-sub-header"><a href="/JavaScript浅入浅出/JavaScript 中的 this（1）- This 是什么？.html#对-this-存在的误解" class="sidebar-link">对 this 存在的误解</a></li><li class="sidebar-sub-header"><a href="/JavaScript浅入浅出/JavaScript 中的 this（1）- This 是什么？.html#this-是什么" class="sidebar-link">this 是什么？</a></li><li class="sidebar-sub-header"><a href="/JavaScript浅入浅出/JavaScript 中的 this（1）- This 是什么？.html#调用位置是什么" class="sidebar-link">调用位置是什么？</a></li><li class="sidebar-sub-header"><a href="/JavaScript浅入浅出/JavaScript 中的 this（1）- This 是什么？.html#小结" class="sidebar-link">小结</a></li></ul></li><li><a href="/JavaScript浅入浅出/宏任务和微任务的执行顺序.html" class="sidebar-link">/JavaScript浅入浅出/宏任务和微任务的执行顺序.html</a></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h2 id="为什么要使用-this"><a href="#为什么要使用-this" class="header-anchor">#</a> 为什么要使用 this ？</h2> <p>this 可以避免显式地传递对象，取而代之的是一种更优雅的方式来隐式地“传递”一个对象引用，通过这种方式来将API设计得更加简洁并且易于复用。</p> <h2 id="对-this-存在的误解"><a href="#对-this-存在的误解" class="header-anchor">#</a> 对 this 存在的<strong>误解</strong></h2> <p>​	<strong>X</strong>		this 指向自身</p> <p>​	<strong>X</strong>		this 指向它的作用域</p> <h2 id="this-是什么"><a href="#this-是什么" class="header-anchor">#</a> this 是什么？</h2> <ul><li><p>当一个函数被调用时，会创建一个活动记录（有时候也称为执行上下文）。这个记录会包含函数在哪里被调用（调用栈）、函数的调用方式、传入的参数等信息。this就是这个记录的一个属性，会在函数执行的过程中用到。</p></li> <li><p>每个函数的this是在调用时被绑定的，完全取决于函数的<strong>调用位置</strong></p></li></ul> <h2 id="调用位置是什么"><a href="#调用位置是什么" class="header-anchor">#</a> 调用位置是什么？</h2> <ul><li><p>调用位置就是函数在代码中被调用的位置（而不是声明的位置）</p></li> <li><p>定义很简单，但要找到实际情况中的函数调用位置，最重要的是分析<strong>调用栈</strong></p></li> <li><p>调用位置就在调用栈中<strong>当前执行</strong>函数的<strong>前一个</strong>调用中</p></li></ul> <p>下面我们来看看到底什么是<strong>调用栈</strong>和<strong>调用位置</strong>：</p> <div class="language-javascript line-numbers-mode"><pre class="language-javascript"><code><span class="token keyword">function</span> <span class="token function">baz</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>￼
+    <span class="token comment">// 当前调用栈是：baz￼</span>
+    <span class="token comment">// 因此，当前调用位置是全局作用域￼</span>
+    ￼
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;baz&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>￼
+    <span class="token function">bar</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// &lt;-- bar的调用位置￼</span>
+<span class="token punctuation">}</span>￼
+￼
+<span class="token keyword">function</span> <span class="token function">bar</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    ￼
+    <span class="token comment">// 当前调用栈是baz -&gt; bar￼</span>
+    <span class="token comment">// 因此，当前调用位置在baz中￼</span>
+    ￼
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;bar&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>￼
+    <span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// &lt;-- foo的调用位置￼</span>
+<span class="token punctuation">}</span>￼
+￼
+<span class="token keyword">function</span> <span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>￼
+    <span class="token comment">// 当前调用栈是baz -&gt; bar -&gt; foo￼</span>
+    <span class="token comment">// 因此，当前调用位置在bar中￼</span>
+    ￼
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;foo&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>￼
+<span class="token punctuation">}</span>￼
+               ￼
+<span class="token function">baz</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// &lt;-- baz的调用位置</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br></div></div><p>在实际编程中，可以使用浏览器的调试工具，其中包含了JavaScript调试器。</p> <p>就本例来说，你可以在工具中给foo()函数的第一行代码设置一个断点，或者直接在第一行代码之前插入一条debugger;语句。运行代码时，调试器会在那个位置暂停，同时会展示当前位置的函数调用列表，这就是你的调用栈。因此，如果你想要分析this的绑定，使用开发者工具得到调用栈，然后找到栈中第二个元素，这就是真正的调用位置。</p> <p>实战：</p> <p><img src="https://gitee.com/yxon123/gitee-sources/raw/master//Images/20200815214931.png" alt="image-20200815214232759"></p> <img src="https://gitee.com/yxon123/gitee-sources/raw/master//Images/20200815214310.png" alt="image-20200815214310543" style="zoom:150%;"> <p>找到调用位置之后，this 的绑定还需要遵循一些规则，规则有如下四条：</p> <ol><li>默认绑定</li> <li>隐式绑定</li> <li>显示绑定</li> <li>new 绑定</li></ol> <p>当其中几条规则同时适用时，需要按照一个优先级来遵循优先级第一位的规则。</p> <h2 id="小结"><a href="#小结" class="header-anchor">#</a> 小结</h2> <ul><li>this 可以避免显示地传递对象，让代码简洁易复用。</li> <li>this 的绑定只和调用位置有关，且遵循一定的规则。</li> <li>可以通过调用栈来找到调用位置。</li></ul></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><!----> <span class="next"><a href="/JavaScript浅入浅出/宏任务和微任务的执行顺序.html">
+        /JavaScript浅入浅出/宏任务和微任务的执行顺序.html
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.87fe75b5.js" defer></script><script src="/assets/js/2.a701810a.js" defer></script><script src="/assets/js/5.7013faeb.js" defer></script>
+  </body>
+</html>

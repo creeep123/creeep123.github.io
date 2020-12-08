@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>0.1+0.2===0.3吗，为什么？ | 杨兄的博客</title>
+    <meta name="generator" content="VuePress 1.5.4">
+    <link rel="icon" href="/logo.png">
+    <meta name="description" content="个人技术指北">
+    <link rel="preload" href="/assets/css/0.styles.18bdc21d.css" as="style"><link rel="preload" href="/assets/js/app.87fe75b5.js" as="script"><link rel="preload" href="/assets/js/2.a701810a.js" as="script"><link rel="preload" href="/assets/js/11.29c857a5.js" as="script"><link rel="prefetch" href="/assets/js/10.ca5f7df5.js"><link rel="prefetch" href="/assets/js/12.b6d1b96e.js"><link rel="prefetch" href="/assets/js/13.dc04e67a.js"><link rel="prefetch" href="/assets/js/14.7d697598.js"><link rel="prefetch" href="/assets/js/15.c86a708e.js"><link rel="prefetch" href="/assets/js/3.11acdd8a.js"><link rel="prefetch" href="/assets/js/4.60651a5a.js"><link rel="prefetch" href="/assets/js/5.7013faeb.js"><link rel="prefetch" href="/assets/js/6.fb9270ea.js"><link rel="prefetch" href="/assets/js/7.be965ecd.js"><link rel="prefetch" href="/assets/js/8.efb1e9c8.js"><link rel="prefetch" href="/assets/js/9.b1dd579a.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.18bdc21d.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">杨兄的博客</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/前端面试题/" class="nav-link">
+  前端
+</a></div><div class="nav-item"><a href="/算法/" class="nav-link">
+  算法
+</a></div><div class="nav-item"><a href="/JavaScript浅入浅出/" class="nav-link">
+  JS
+</a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/前端面试题/" class="nav-link">
+  前端
+</a></div><div class="nav-item"><a href="/算法/" class="nav-link">
+  算法
+</a></div><div class="nav-item"><a href="/JavaScript浅入浅出/" class="nav-link">
+  JS
+</a></div> <!----></nav>  <ul class="sidebar-links"><li><a href="/前端面试题/2020-11-03.html" class="sidebar-link">2020-11-03 数组去重</a></li><li><a href="/前端面试题/2020-11-04.html" class="sidebar-link">2020-11-04 输入url 后发生了什么？</a></li><li><a href="/前端面试题/2020-11-05.html" class="active sidebar-link">2020-11-05 垂直居中的CSS实现</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/前端面试题/2020-11-05.html#_0-1-0-2-0-3吗-为什么" class="sidebar-link">0.1+0.2===0.3吗，为什么？</a></li><li class="sidebar-sub-header"><a href="/前端面试题/2020-11-05.html#number-的存储空间是多大-如果后台发送了一个超过最大字节的数字怎么办" class="sidebar-link">Number()的存储空间是多大，如果后台发送了一个超过最大字节的数字怎么办？</a></li><li class="sidebar-sub-header"><a href="/前端面试题/2020-11-05.html#垂直居中实现方法" class="sidebar-link">垂直居中实现方法</a></li></ul></li><li><a href="/前端面试题/2020-11-06.html" class="sidebar-link">2020-11-06 cookie</a></li><li><a href="/前端面试题/2020-11-21.html" class="sidebar-link">2020-11-21 forEach/ for of/ for in</a></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h2 id="_0-1-0-2-0-3吗-为什么"><a href="#_0-1-0-2-0-3吗-为什么" class="header-anchor">#</a> 0.1+0.2===0.3吗，为什么？</h2> <p>0.1 的二进制表示为：</p> <blockquote><div class="language- line-numbers-mode"><pre class="language-text"><code>0.1 = 2^-4 * 1.10011(0011)// (0011) 表示循环
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div></blockquote> <p>0.2 的二进制表示为：</p> <blockquote><div class="language- line-numbers-mode"><pre class="language-text"><code>0.2 = 2^-3 * 1.10011(0011)// (0011) 表示循环
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div></blockquote> <p>六十四位中符号位占一位，整数位占十一位，其余五十二位都为小数位。因为 0.1 和 0.2 都是无限循环的二进制了，所以在小数位末尾处需要判断是否进位（就和十进制的四舍五入一样）。
+所以 <code>2^-4 * 1.10011...001</code> 进位后就变成了<code>2^-4 * 1.10011(0011 * 12次)010</code> 。那么把这两个二进制加起来会得出 <code>2^-2 * 1.0011(0011 * 11次)0100</code> , 这个值算成十进制就是<code>0.30000000000000004</code></p> <h2 id="number-的存储空间是多大-如果后台发送了一个超过最大字节的数字怎么办"><a href="#number-的存储空间是多大-如果后台发送了一个超过最大字节的数字怎么办" class="header-anchor">#</a> Number()的存储空间是多大，如果后台发送了一个超过最大字节的数字怎么办？</h2> <ul><li>2的53次方</li> <li>解决方法
+<ol><li>转化为字符串（<code>numStr = num + &quot;&quot;</code>）</li> <li>使用BigInt来接受后台传递的数据（<code>BigInt(sourceNum)</code>）</li></ol></li></ul> <h2 id="垂直居中实现方法"><a href="#垂直居中实现方法" class="header-anchor">#</a> 垂直居中实现方法</h2> <ol><li><p><code>Flex</code>设置父元素</p> <div class="language-css line-numbers-mode"><pre class="language-css"><code><span class="token selector">#box</span><span class="token punctuation">{</span>
+    <span class="token property">display</span><span class="token punctuation">:</span> flex<span class="token punctuation">;</span>
+    <span class="token property">justify-content</span><span class="token punctuation">:</span> center<span class="token punctuation">;</span> <span class="token comment">/*使子项目水平居中*/</span>
+    <span class="token property">align-items</span><span class="token punctuation">:</span> center<span class="token punctuation">;</span> <span class="token comment">/*使子项目垂直居中*/</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div></li> <li><p>绝对定位和<code>transform</code></p> <div class="language-css line-numbers-mode"><pre class="language-css"><code><span class="token selector">#box</span> <span class="token punctuation">{</span>
+    <span class="token property">position</span><span class="token punctuation">:</span>relative<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token selector">#child</span> <span class="token punctuation">{</span>
+    <span class="token property">position</span><span class="token punctuation">:</span>absolute<span class="token punctuation">;</span>
+    <span class="token property">transform</span><span class="token punctuation">:</span><span class="token function">translate</span><span class="token punctuation">(</span>50%<span class="token punctuation">,</span>-50%<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div><p>这种方法非常明显的好处就是不必提前知道被居中的元素的尺寸，因为transform中偏移的百分比就是相对于元素自身的尺寸而言。</p></li> <li><p>绝对定位结合<code>margin:auto</code></p> <div class="language-css line-numbers-mode"><pre class="language-css"><code><span class="token selector">#box</span> <span class="token punctuation">{</span>
+    <span class="token property">position</span><span class="token punctuation">:</span>relative<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token selector">#child</span> <span class="token punctuation">{</span>
+    <span class="token property">position</span><span class="token punctuation">:</span>absolute<span class="token punctuation">;</span>
+    <span class="token property">top</span><span class="token punctuation">:</span>0<span class="token punctuation">;</span>
+    <span class="token property">buttom</span><span class="token punctuation">:</span>0<span class="token punctuation">;</span>
+    <span class="token property">margin</span><span class="token punctuation">:</span>auto<span class="token punctuation">;</span>
+    <span class="token property">transform</span><span class="token punctuation">:</span><span class="token function">translate</span><span class="token punctuation">(</span>50%<span class="token punctuation">,</span>-50%<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br></div></div><p>把要垂直居中的元素相对于父元素绝对定位，top和bottom设置为相等的值;再将要居中的元素的margin设为auto。</p></li> <li><p>使用<code>padding</code>实现子元素的垂直居中</p> <div class="language-css line-numbers-mode"><pre class="language-css"><code><span class="token selector">#box</span> <span class="token punctuation">{</span>
+    <span class="token property">padding</span><span class="token punctuation">:</span>10px 0<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token selector">#child</span> <span class="token punctuation">{</span>
+    <span class="token property">width</span><span class="token punctuation">:</span>200px<span class="token punctuation">;</span>
+    <span class="token property">height</span><span class="token punctuation">:</span>100px<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div><p>给父元素设置相等的上下内边距，则子元素自然是垂直居中，<strong>注意</strong>这个时候父元素是不能设置高度的。</p></li> <li><p>使用<code>line-height</code>对单行文本进行垂直居中</p> <div class="language-css line-numbers-mode"><pre class="language-css"><code><span class="token selector">#child</span> <span class="token punctuation">{</span>
+    <span class="token property">width</span><span class="token punctuation">:</span>200px<span class="token punctuation">;</span>
+    <span class="token property">height</span><span class="token punctuation">:</span>100px<span class="token punctuation">;</span>
+    <span class="token property">line-height</span><span class="token punctuation">:</span>100px<span class="token punctuation">;</span>
+    <span class="token property">text-align</span><span class="token punctuation">:</span>center<span class="token punctuation">;</span>
+    <span class="token property">background</span><span class="token punctuation">:</span>orange<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div><p>让 <code>inline-height</code>= <code>height</code>，填充满元素高度。</p></li></ol></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/前端面试题/2020-11-04.html" class="prev">
+        2020-11-04 输入url 后发生了什么？
+      </a></span> <span class="next"><a href="/前端面试题/2020-11-06.html">
+        2020-11-06 cookie
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.87fe75b5.js" defer></script><script src="/assets/js/2.a701810a.js" defer></script><script src="/assets/js/11.29c857a5.js" defer></script>
+  </body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>cookie有哪些属性？大小？浏览器如何禁止别人访问cookie？ | 杨兄的博客</title>
+    <meta name="generator" content="VuePress 1.5.4">
+    <link rel="icon" href="/logo.png">
+    <meta name="description" content="个人技术指北">
+    <link rel="preload" href="/assets/css/0.styles.18bdc21d.css" as="style"><link rel="preload" href="/assets/js/app.87fe75b5.js" as="script"><link rel="preload" href="/assets/js/2.a701810a.js" as="script"><link rel="preload" href="/assets/js/12.b6d1b96e.js" as="script"><link rel="prefetch" href="/assets/js/10.ca5f7df5.js"><link rel="prefetch" href="/assets/js/11.29c857a5.js"><link rel="prefetch" href="/assets/js/13.dc04e67a.js"><link rel="prefetch" href="/assets/js/14.7d697598.js"><link rel="prefetch" href="/assets/js/15.c86a708e.js"><link rel="prefetch" href="/assets/js/3.11acdd8a.js"><link rel="prefetch" href="/assets/js/4.60651a5a.js"><link rel="prefetch" href="/assets/js/5.7013faeb.js"><link rel="prefetch" href="/assets/js/6.fb9270ea.js"><link rel="prefetch" href="/assets/js/7.be965ecd.js"><link rel="prefetch" href="/assets/js/8.efb1e9c8.js"><link rel="prefetch" href="/assets/js/9.b1dd579a.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.18bdc21d.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">杨兄的博客</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/前端面试题/" class="nav-link">
+  前端
+</a></div><div class="nav-item"><a href="/算法/" class="nav-link">
+  算法
+</a></div><div class="nav-item"><a href="/JavaScript浅入浅出/" class="nav-link">
+  JS
+</a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/前端面试题/" class="nav-link">
+  前端
+</a></div><div class="nav-item"><a href="/算法/" class="nav-link">
+  算法
+</a></div><div class="nav-item"><a href="/JavaScript浅入浅出/" class="nav-link">
+  JS
+</a></div> <!----></nav>  <ul class="sidebar-links"><li><a href="/前端面试题/2020-11-03.html" class="sidebar-link">2020-11-03 数组去重</a></li><li><a href="/前端面试题/2020-11-04.html" class="sidebar-link">2020-11-04 输入url 后发生了什么？</a></li><li><a href="/前端面试题/2020-11-05.html" class="sidebar-link">2020-11-05 垂直居中的CSS实现</a></li><li><a href="/前端面试题/2020-11-06.html" class="active sidebar-link">2020-11-06 cookie</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/前端面试题/2020-11-06.html#cookie有哪些属性-大小-浏览器如何禁止别人访问cookie" class="sidebar-link">cookie有哪些属性？大小？浏览器如何禁止别人访问cookie？</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/前端面试题/2020-11-06.html#属性" class="sidebar-link">属性：</a></li><li class="sidebar-sub-header"><a href="/前端面试题/2020-11-06.html#大小" class="sidebar-link">大小</a></li><li class="sidebar-sub-header"><a href="/前端面试题/2020-11-06.html#如何禁止" class="sidebar-link">如何禁止</a></li></ul></li><li class="sidebar-sub-header"><a href="/前端面试题/2020-11-06.html#localstorage-sessionstorage的区别" class="sidebar-link">localStorage，sessionStorage的区别</a></li><li class="sidebar-sub-header"><a href="/前端面试题/2020-11-06.html#display-none-visibility-hidden-opactiy-0的区别" class="sidebar-link">display:none,visibility:hidden,opactiy:0的区别</a></li></ul></li><li><a href="/前端面试题/2020-11-21.html" class="sidebar-link">2020-11-21 forEach/ for of/ for in</a></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h2 id="cookie有哪些属性-大小-浏览器如何禁止别人访问cookie"><a href="#cookie有哪些属性-大小-浏览器如何禁止别人访问cookie" class="header-anchor">#</a> cookie有哪些属性？大小？浏览器如何禁止别人访问cookie？</h2> <h3 id="属性"><a href="#属性" class="header-anchor">#</a> 属性：</h3> <ul><li><p><code>Expires</code></p></li> <li><p><code>Secure</code> 标记为 <code>Secure</code> 的 Cookie 只应通过被 HTTPS 协议加密过的请求发送给服务端</p> <ul><li><code>HttpOnly</code>通过<strong>js脚本</strong>将无法读取到cookie信息，这样能有效的防止XSS攻击</li></ul></li> <li><p><code>Domain</code>和<code>Path</code>哪些主机/路径可以接受 Cookie</p> <ul><li><code>SameSite</code> Cookie 允许服务器要求某个 cookie 在跨站请求时不会被发送</li></ul></li></ul> <h3 id="大小"><a href="#大小" class="header-anchor">#</a> 大小</h3> <p>4kb</p> <h3 id="如何禁止"><a href="#如何禁止" class="header-anchor">#</a> 如何禁止</h3> <p>🚱</p> <h2 id="localstorage-sessionstorage的区别"><a href="#localstorage-sessionstorage的区别" class="header-anchor">#</a> localStorage，sessionStorage的区别</h2> <p><img src="https://gitee.com/yxon123/gitee-sources/raw/master//Images/image-20201023101410690.png" alt="image-20201023101410690"></p> <p>（唯一区别是<code>数据的生命期</code>）</p> <h2 id="display-none-visibility-hidden-opactiy-0的区别"><a href="#display-none-visibility-hidden-opactiy-0的区别" class="header-anchor">#</a> <code>display:none</code>,<code>visibility:hidden</code>,<code>opactiy:0</code>的区别</h2> <div class="language- line-numbers-mode"><pre class="language-text"><code>1 opacity=0，该元素隐藏起来了，但不会改变页面布局，并且，如果该元素已经绑定一些事件，如click事件，那么点击该区域，也能触发点击事件的
+2 visibility=hidden，该元素隐藏起来了，但不会改变页面布局，但是不会触发该元素已经绑定的事件
+3 display=none，把元素隐藏起来，并且会改变页面布局，可以理解成在页面中把该元素删除掉一样
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><table><thead><tr><th>对比项</th> <th>不可见性</th> <th>改变布局</th> <th>触发事件</th></tr></thead> <tbody><tr><td>opacity: 0</td> <td>✔</td> <td>❌</td> <td>✔</td></tr> <tr><td>visibility: hidden</td> <td>✔</td> <td>❌</td> <td>❌</td></tr> <tr><td>display: none</td> <td>✔</td> <td>✔（不会出现在<code>renderTree</code>上）</td> <td>❌</td></tr></tbody></table></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/前端面试题/2020-11-05.html" class="prev">
+        2020-11-05 垂直居中的CSS实现
+      </a></span> <span class="next"><a href="/前端面试题/2020-11-21.html">
+        2020-11-21 forEach/ for of/ for in
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.87fe75b5.js" defer></script><script src="/assets/js/2.a701810a.js" defer></script><script src="/assets/js/12.b6d1b96e.js" defer></script>
+  </body>
+</html>
