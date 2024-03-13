@@ -1,0 +1,335 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>【七日谈】0016 Knowledge Gaps - 杨的胸</title>
+<link rel="shortcut icon" href="https://creeep123.github.io/favicon.ico">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.2.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css">
+<link rel="stylesheet" href="https://creeep123.github.io/media/css/tailwind.css">
+<link rel="stylesheet" href="https://creeep123.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="【七日谈】0016 Knowledge Gaps - 杨的胸 - Atom Feed" href="https://creeep123.github.io/atom.xml">
+
+    
+
+  <meta name="description" content="Knowledge Gaps
+Overreacted博客的拥有者，Dan Abramov，是一名资深的开发者，同时也输出了非常多优秀的技术文章。例如在 0013 期七日谈中，我分享了一篇深入浅出的文章（《函数式组件与类组件有何不同？》），正..." />
+  <meta property="og:title" content="【七日谈】0016 Knowledge Gaps - 杨的胸">
+  <meta property="og:description" content="Knowledge Gaps
+Overreacted博客的拥有者，Dan Abramov，是一名资深的开发者，同时也输出了非常多优秀的技术文章。例如在 0013 期七日谈中，我分享了一篇深入浅出的文章（《函数式组件与类组件有何不同？》），正..." />
+  <meta property="og:type" content="articles">
+  <meta property="og:url" content="https://creeep123.github.io/post/1/" />
+  <meta property="og:image" content="https://creeep123.github.io/images/avatar.png">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:width" content="1200">
+  <meta name="twitter:title" content="【七日谈】0016 Knowledge Gaps - 杨的胸">
+  <meta name="twitter:description" content="Knowledge Gaps
+Overreacted博客的拥有者，Dan Abramov，是一名资深的开发者，同时也输出了非常多优秀的技术文章。例如在 0013 期七日谈中，我分享了一篇深入浅出的文章（《函数式组件与类组件有何不同？》），正...">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://creeep123.github.io/post/1/">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
+ 
+  
+
+  
+</head>
+
+<body>
+  <div class="antialiased flex flex-col min-h-screen" id="app">
+    <a href="https://creeep123.github.io" class="fixed top-0 left-0 mt-4 bg-black text-white dark:text-gray-700 dark:bg-yellow-50 dark:hover:bg-black dark:hover:text-white inline-flex p-2 pl-8 hover:text-gray-700 hover:bg-yellow-50 font-bold z-10 transition-fast animated fadeInLeft">
+      杨的胸
+    </a>
+    <div class="max-w-4xl w-full mx-auto">
+      <div class="shadow-box bg-white dark:bg-gray-600 rounded-lg pt-32 md:pt-64 px-4 md:px-8 pb-8 animated fadeIn mb-8">
+        <h1 class="text-5xl font-semibold leading-normal pb-8 mb-8 border-b-8 border-gray-700">
+          【七日谈】0016 Knowledge Gaps
+        </h1>
+        
+        <div class="mb-8 flex flex-wrap">
+          <div class="text-gray-400 text-sm mr-4">2021-08-24 · 3 min read</div>
+          
+        </div>
+        <div class="markdown mb-8" v-pre>
+          <h1 id="knowledge-gaps">Knowledge Gaps</h1>
+<p><a href="https://overreacted.io/">Overreacted</a>博客的拥有者，<a href="https://mobile.twitter.com/dan_abramov">Dan Abramov</a>，是一名资深的开发者，同时也输出了非常多优秀的技术文章。例如在 0013 期七日谈中，我分享了一篇深入浅出的文章（<a href="http://email.mg1.hedwig.pub/c/eJwVjrtuxCAURL_G7kA81tgUFE6yW6dNic3FoLW5FuBdKV8fIk1xNNIZjTN8nEYNfTSCCc5GLrjkSjDKqfwYhLp_zg8xKHWfZXdjx8ZpAPeOGz2vpQ9GeqaBe5jk4IANetVWCDW5kUt9W5ax302o9SydnDvxaMEX5Ax2reBoxFb8BhJsKo0CvonNQPyV1hoxkRWPExOkWoiL3kNuSHzGg6y7LQX-pT6bL_uK7sem7RtywWT3dhSvuiM-aZv4AxxMSBg">《函数式组件与类组件有何不同？》</a>），正是出自Dan Abramov之手。上周 Dan 发送了<a href="https://overreacted.io/things-i-dont-know-as-of-2018/?ck_subscriber_id=1344281637">一篇通讯</a>，在这里他诚实地暴露了自己的 knowledge gaps （知识上的空白），例如，除了<code>ls</code>和<code>cd</code>，几乎所有的Unix命令他都是现用现查；他从来没有尝试过自己架设看似基础的HTTPS/TSL，也对具体原理所知甚浅。他想通过这种方式来鼓励初学者不要被密密麻麻的 road maps 给吓跑，road maps 只起一个导向作用，即使是资深开发者也并非全知全能。虽然没什么知识增量，但这篇通讯大大缓解了我的学习焦虑。推荐有开发经历的人读一读，非常舒适。</p>
+<hr>
+<h1 id="见闻">见闻</h1>
+<p><a href="https://mp.weixin.qq.com/s/HPraBzoC60XUsNZbQgJMSQ">核查|伊藤美诚输球后指责中国为胜利不择手段？ </a></p>
+<p><a href="https://mp.weixin.qq.com/s/DITAMxHGM2gKWpBk-fHMTQ">复读十二年，走不出的高三 </a></p>
+<p><a href="https://mp.weixin.qq.com/s/gu1eUNVmmW5rAFABlLkUzg?utm_campaign=%E8%BD%BB%E8%8A%92%E5%B0%81%E9%9D%A2&amp;utm_medium=email&amp;utm_source=Revue%20newsletter">中概股的黄昏 </a></p>
+<p><a href="https://mp.weixin.qq.com/s/025GjGhSz0pbu2JGWr1nOQ">打压教育（假），节制资本（真） </a></p>
+<hr>
+<h1 id="新知">新知</h1>
+<p><a href="https://www.zhangxinxu.com/wordpress/2021/07/css-white-space-nowrap/">为什么white-space:nowrap可以让文字一行显示？</a></p>
+<ol>
+<li><code>white-space:nowrap</code>的意思就是空格不换行。</li>
+<li>在Web中，换行符会被解析为空格。</li>
+</ol>
+<p><a href="https://mp.weixin.qq.com/s/KQgp_4l0h3F9X5qDUHkkrQ">2021 年 Web 应用程序的最佳图像格式 (qq.com)</a></p>
+<hr>
+<h1 id="工具">工具</h1>
+<p><a href="https://avatar.gaoxiazhitu.com/">高下制图-头像生成器 </a></p>
+<figure data-type="image" tabindex="1"><img src="https://gitee.com/yxon123/gitee-sources/raw/master//Images/image-20210731105456218.png" alt="image-20210731105456218" loading="lazy"></figure>
+<p><a href="https://hellogithub.com/periodical/volume/63/#lowdb">lowdb</a></p>
+<blockquote>
+<p>low code 和 no code 热火朝天的今天，你有想过 lowdb 吗？<br>
+lowdb 支持浏览器和 Electron 的轻量级 JSON 文件数据库。如果是创建没有后端的小型前端项目，但还有存储和管理数据的需求，那就快试试 lowdb 吧。</p>
+</blockquote>
+<p><a href="http://fec.mofcom.gov.cn/article/gbdqzn/indexphone.shtml">《对外投资合作国别（地区）指南》</a></p>
+<p><a href="https://github.com/tans/push-bot">tans/push-bot: 基于wechaty的微信推送机器人</a></p>
+<hr>
+<h1 id="一周-crypto">一周 Crypto</h1>
+<p><a href="https://www.chainnews.com/articles/181669710167.htm">DAO 全景式科普：分类、实用工具、发展历程、前景展望</a></p>
+<figure data-type="image" tabindex="2"><img src="https://gitee.com/yxon123/gitee-sources/raw/master//Images/image-20210803103311368.png" alt="image-20210803103311368" loading="lazy"></figure>
+<p><a href="https://ethfans.org/posts/the-onion-model-of-blockchain-security">观点 | 剖析区块链安全性的洋葱模型</a></p>
+<p>作者提出，区块链的安全模型就像一颗洋葱，每一层都为其提供了安全性，攻击者只有击破最后一层，才能真正摧毁区块链。</p>
+<p>如图的四个安全层，由外到内分别是<strong>密码学保证、共识保证、经济保证、社会保证</strong>。</p>
+<p><em>“若想永久性杀死一条区块链，要么就让用户彻底失去对其账本状态的兴趣，要么就将系统破坏到无法修复的程度。”</em></p>
+<figure data-type="image" tabindex="3"><img src="https://gitee.com/yxon123/gitee-sources/raw/master//Images/88ea7283fb484fdab3cbe5f74a96fc77.png" alt="2" loading="lazy"></figure>
+<hr>
+<h1 id="文摘">文摘</h1>
+<p>1/</p>
+<blockquote>
+<p>事实上，对任何资源数量真正的限制一直都是人类投入的生产时间，人类的时间才是真正的具有稀缺性的资源（直到比特币的诞生）。</p>
+<p>-- 《货币未来：从金本位到区块链》</p>
+</blockquote>
+
+        </div>
+        <!-- Share to Twitter, Weibo, Telegram -->
+        <div class="flex items-center">
+          <div class="mr-4 flex items-center">
+            <i class="ri-share-forward-line text-gray-500"></i>
+          </div>
+          <div class="px-4 cursor-pointer text-blue-500 hover:bg-blue-100 dark:hover:bg-gray-600 inline-flex" @click="shareToTwitter">
+            <i class="ri-twitter-line"></i>
+          </div>
+          <div class="px-4 cursor-pointer text-red-500 hover:bg-red-100 dark:hover:bg-gray-600 inline-flex" @click="shareToWeibo">
+            <i class="ri-weibo-line"></i>
+          </div>
+          <div class="px-4 cursor-pointer text-indigo-500 hover:bg-indigo-100 dark:hover:bg-gray-600 inline-flex" @click="shareToTelegram">
+            <i class="ri-telegram-line"></i>
+          </div>
+        </div>
+      </div>
+
+      
+        
+          <div id="gitalk-container"></div>
+        
+
+        
+      
+
+      
+
+      <footer class="py-12 text-center px-4 md:px-0" v-pre>
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+</footer>
+    </div>
+
+    <!-- TOC Container -->
+    <div class="fixed right-0 bottom-0 mb-16 mr-4 shadow w-8 h-8 rounded-full flex justify-center items-center z-10 cursor-pointer bg-white dark:bg-gray-500 dark:text-gray-200 hover:shadow-lg transition-all animated fadeInRight" @click="showToc = true">
+      <i class="ri-file-list-line"></i>
+    </div>
+
+    <div class="fixed right-0 top-0 bottom-0 overflow-y-auto w-64 bg-white dark:bg-gray-800 p-4 border-l border-gray-100 dark:border-gray-600 z-10 transition-fast" :class="{ '-mr-64': !showToc }">
+      <div class="flex mb-4 justify-end">
+        <div class="w-8 h-8 inline-flex justify-center items-center rounded-full cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-600 transition-fast" @click="showToc = false">
+          <i class="ri-close-line text-lg"></i>
+        </div>
+      </div>
+      <div class="post-toc-container">
+        <ul class="markdownIt-TOC">
+<li><a href="#knowledge-gaps">Knowledge Gaps</a></li>
+<li><a href="#%E8%A7%81%E9%97%BB">见闻</a></li>
+<li><a href="#%E6%96%B0%E7%9F%A5">新知</a></li>
+<li><a href="#%E5%B7%A5%E5%85%B7">工具</a></li>
+<li><a href="#%E4%B8%80%E5%91%A8-crypto">一周 Crypto</a></li>
+<li><a href="#%E6%96%87%E6%91%98">文摘</a></li>
+</ul>
+
+      </div>
+    </div>
+
+    <!-- Back to top -->
+    <div class="fixed right-0 bottom-0 mb-4 mr-4 shadow w-8 h-8 rounded-full flex justify-center items-center z-10 cursor-pointer bg-white hover:shadow-lg transition-all dark:bg-gray-500 dark:text-gray-200" @click="backToUp" v-show="scrolled">
+      <i class="ri-arrow-up-line"></i>
+    </div>
+  </div>
+
+  <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+  <!-- Background of PhotoSwipe. 
+        It's a separate element as animating opacity is faster than rgba(). -->
+  <div class="pswp__bg">
+  </div>
+  <!-- Slides wrapper with overflow:hidden. -->
+  <div class="pswp__scroll-wrap">
+    <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+    <div class="pswp__container">
+      <div class="pswp__item">
+      </div>
+      <div class="pswp__item">
+      </div>
+      <div class="pswp__item">
+      </div>
+    </div>
+    <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+    <div class="pswp__ui pswp__ui--hidden">
+      <div class="pswp__top-bar">
+        <!--  Controls are self-explanatory. Order can be changed. -->
+        <div class="pswp__counter">
+        </div>
+        <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+        <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+        <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+        <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+        <!-- element will get class pswp__preloader--active when preloader is running -->
+        <div class="pswp__preloader">
+          <div class="pswp__preloader__icn">
+            <div class="pswp__preloader__cut">
+              <div class="pswp__preloader__donut">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+        <div class="pswp__share-tooltip">
+        </div>
+      </div>
+      <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+      </button>
+      <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+      </button>
+      <div class="pswp__caption">
+        <div class="pswp__caption__center">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://creeep123.github.io/media/scripts/main.js"></script>
+  
+  <!-- Code Highlight -->
+  
+
+  <script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+  <script>
+    //拿到预览框架，也就是上面的html代码
+    var pswpElement = document.querySelectorAll('.pswp')[0];
+    //定义图片数组变量
+    var imgitems;
+    /**
+    * 用于显示预览界面
+    * @param index 图片数组下标
+    */
+    function viewImg(index) {
+      //其它选项这里不做过多阐述，详情见官网
+      var pswpoptions = {
+        index: parseInt(index, 10), // 开始幻灯片索引。0是第一张幻灯片。必须是整数，而不是字符串。
+        bgOpacity: 0.7, // 背景透明度，0-1
+        maxSpreadZoom: 3, // 缩放级别，不要太大
+      };
+      //初始化并打开PhotoSwipe，pswpElement对应上面预览框架，PhotoSwipeUI_Default为皮肤，imgitems为图片数组，pswpoptions为选项
+      var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, imgitems, pswpoptions);
+      gallery.init()
+    }
+    /**
+    * 用于添加图片点击事件
+    * @param img 图片元素
+    * @param index 所属下标（在imgitems中的位置）
+    */
+    function addImgClick(img, index) {
+      img.onclick = function() {
+        viewImg(index)
+      }
+    }
+    /**
+    * 轮询所有图片，获取src、width、height等数据，加入imgitems，并给图片元素添加事件
+    * 最好在onload中执行该方法，本站因放在最底部，所以直接初始化
+    * 异步加载图片可在图片元素创建完成后调用此方法
+    */
+    function initImg() {
+      //重置图片数组
+      imgitems = [];
+      //查找class:markdown 下的所有img元素并遍历
+      var imgs = document.querySelectorAll('.markdown img');
+      for (var i = 0; i < imgs.length; i++) {
+        var img = imgs[i];
+        //本站相册初始为loading图片，真实图片放在data-src
+        var ds = img.getAttribute("data-src");
+        //创建image对象，用于获取图片宽高
+        var imgtemp = new Image();
+        //判断是否存在data-src
+        if (ds != null && ds.length > 0) {
+          imgtemp.src = ds
+        } else {
+          imgtemp.src = img.src
+        }
+        //判断是否存在缓存
+        if (imgtemp.complete) {
+          var imgobj = {
+            "src": imgtemp.src,
+            "w": imgtemp.width,
+            "h": imgtemp.height,
+          };
+          imgitems[i] = imgobj;
+          addImgClick(img, i);
+        } else {
+          console.log('进来了2')
+          imgtemp.index = i;
+          imgtemp.img = img;
+          imgtemp.onload = function() {
+            var imgobj = {
+              "src": this.src,
+              "w": this.width,
+              "h": this.height,
+            };
+            //不要使用push，因为onload前后顺序会不同
+            imgitems[this.index] = imgobj
+            //添加点击事件
+            addImgClick(this.img, this.index);
+          }
+        }
+      }
+    }
+    //初始化
+    initImg();
+  </script>
+  
+  
+    
+      <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script type="application/javascript" src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<script type="application/javascript">
+
+  var gitalk = new Gitalk({
+    clientID: '8cdbd17e1bbd6f3605c7',
+    clientSecret: '17a17aba1754d3986900e3b58892da8d8f903249',
+    repo: 'gitTalkRepo',
+    owner: 'creeep123',
+    admin: ['creeep123'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+    
+  
+</body>
+
+</html>
