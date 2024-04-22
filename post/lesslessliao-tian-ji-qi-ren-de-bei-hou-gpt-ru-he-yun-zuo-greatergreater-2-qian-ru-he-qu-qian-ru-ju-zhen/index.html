@@ -1,0 +1,345 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>《聊天机器人的背后，GPT如何运作？》（2）嵌入和去嵌入矩阵 - 杨的胸</title>
+<link rel="shortcut icon" href="https://creeep123.github.io/favicon.ico">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.2.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css">
+<link rel="stylesheet" href="https://creeep123.github.io/media/css/tailwind.css">
+<link rel="stylesheet" href="https://creeep123.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="《聊天机器人的背后，GPT如何运作？》（2）嵌入和去嵌入矩阵 - 杨的胸 - Atom Feed" href="https://creeep123.github.io/atom.xml">
+
+    
+
+  <meta name="description" content="以 GPT3 为例，什么是 Transformer 和 Attention？
+GPT3 中的1750 亿个权重，被组织在大约 28.000 个不同的矩阵中。矩阵被分为 8 个不同类别。，接下来就通过介绍着 8 个类别的矩阵，让你了解什么是G..." />
+  <meta property="og:title" content="《聊天机器人的背后，GPT如何运作？》（2）嵌入和去嵌入矩阵 - 杨的胸">
+  <meta property="og:description" content="以 GPT3 为例，什么是 Transformer 和 Attention？
+GPT3 中的1750 亿个权重，被组织在大约 28.000 个不同的矩阵中。矩阵被分为 8 个不同类别。，接下来就通过介绍着 8 个类别的矩阵，让你了解什么是G..." />
+  <meta property="og:type" content="articles">
+  <meta property="og:url" content="https://creeep123.github.io/post/lesslessliao-tian-ji-qi-ren-de-bei-hou-gpt-ru-he-yun-zuo-greatergreater-2-qian-ru-he-qu-qian-ru-ju-zhen/" />
+  <meta property="og:image" content="https://anon-images-1259646676.cos.ap-beijing.myqcloud.com/cover.png">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:width" content="1200">
+  <meta name="twitter:title" content="《聊天机器人的背后，GPT如何运作？》（2）嵌入和去嵌入矩阵 - 杨的胸">
+  <meta name="twitter:description" content="以 GPT3 为例，什么是 Transformer 和 Attention？
+GPT3 中的1750 亿个权重，被组织在大约 28.000 个不同的矩阵中。矩阵被分为 8 个不同类别。，接下来就通过介绍着 8 个类别的矩阵，让你了解什么是G...">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://creeep123.github.io/post/lesslessliao-tian-ji-qi-ren-de-bei-hou-gpt-ru-he-yun-zuo-greatergreater-2-qian-ru-he-qu-qian-ru-ju-zhen/">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
+ 
+  
+
+  
+</head>
+
+<body>
+  <div class="antialiased flex flex-col min-h-screen" id="app">
+    <a href="https://creeep123.github.io" class="fixed top-0 left-0 mt-4 bg-black text-white dark:text-gray-700 dark:bg-yellow-50 dark:hover:bg-black dark:hover:text-white inline-flex p-2 pl-8 hover:text-gray-700 hover:bg-yellow-50 font-bold z-10 transition-fast animated fadeInLeft">
+      杨的胸
+    </a>
+    <div class="max-w-4xl w-full mx-auto">
+      <div class="shadow-box bg-white dark:bg-gray-600 rounded-lg pt-32 md:pt-64 px-4 md:px-8 pb-8 animated fadeIn mb-8">
+        <h1 class="text-5xl font-semibold leading-normal pb-8 mb-8 border-b-8 border-gray-700">
+          《聊天机器人的背后，GPT如何运作？》（2）嵌入和去嵌入矩阵
+        </h1>
+        
+          <img src="https://anon-images-1259646676.cos.ap-beijing.myqcloud.com/cover.png" alt="《聊天机器人的背后，GPT如何运作？》（2）嵌入和去嵌入矩阵" class="block w-full mb-8">
+        
+        <div class="mb-8 flex flex-wrap">
+          <div class="text-gray-400 text-sm mr-4">2024-04-22 · 5 min read</div>
+          
+        </div>
+        <div class="markdown mb-8" v-pre>
+          <p>以 GPT3 为例，什么是 Transformer 和 Attention？</p>
+<p>GPT3 中的1750 亿个权重，被组织在大约 28.000 个不同的矩阵中。<strong>矩阵被分为 8 个不同类别。</strong>，接下来就通过介绍着 8 个类别的矩阵，让你了解什么是GPT。</p>
+<!-- more -->
+<p>需要区分两个概念：权重（视频中为蓝色或红色）和数据（白色或灰色）。权重就是模型的大脑，是在训练过程中学到的，它们决定了模型的行为模式。</p>
+<h3 id="一-嵌入矩阵embedding-matrix-参数-617558016">一、嵌入矩阵（Embedding matrix）-- 参数 617,558,016</h3>
+<p>（从这里开始，我们把“Token”简化为“单词”，便于理解）<br>
+<img src="https://anon-images-1259646676.cos.ap-beijing.myqcloud.com/word2vec-distributed-representation.png" alt="The amazing power of word vectors | the morning paper" loading="lazy"></p>
+<p>嵌入矩阵，用 <strong>【预设词汇库】</strong> 为全部的词分配了一个独立的列，嵌入矩阵中的每一列，就对应着一个单词在第一步中转换成的向量。</p>
+<ol>
+<li><strong>定理一</strong>：在多维空间中，每一个维（方向）都能够传达特定的语义。</li>
+<li><strong>定理二</strong>：两个向量的点积可以被视为一种衡量他们是否对齐的方法
+<ol>
+<li>点积为正：两个向量指向方向相似</li>
+<li>点积为0：两个向量指向方向垂直</li>
+<li>点积为负：两个向量指向方向相反</li>
+</ol>
+</li>
+<li>例子：我们用 <code>cats向量</code>-<code>cat向量</code>，得到语义为“复数程度”的向量，用单数名词点乘这个向量时，获得的值往往为负；复数时，获得值为正。</li>
+</ol>
+<p>对于 GPT3 模型，这个嵌入矩阵中</p>
+<ul>
+<li>包含的词汇量为 50,257</li>
+<li>嵌入的维度是 12,288</li>
+<li>==&gt; 相乘后大约有 6.17 亿个权重</li>
+</ul>
+<p>被“嵌入”的词只代表了单个词汇，不涉及周围信息，但我们需要它去包含词汇的位置信息，也就是结合必要的上下文。</p>
+<p>第一步里，我们使用嵌入矩阵，将输入内容转化为<strong>初始向量数组。</strong></p>
+<p>接下来，就要让这个<strong>初始向量数组</strong>通过网络，使得每一个向量都获得比单个词更丰富更具体的含义。这个网络每次只能处理一定数量的向量，这个数量就是上下文大小（ Context Size）</p>
+<p>补充：事实上，初始向量数组还包含了每一个单词的位置信息，即他们位于输入内容中的位置</p>
+<h3 id="二-去嵌入矩阵unembedding-matrix-参数-617558016-和嵌入矩阵相同">二、去嵌入矩阵（Unembedding Matrix）-- 参数 617,558,016 （和嵌入矩阵相同）</h3>
+<ol>
+<li>将上下文（Context）中的最后一个向量，通过和 <strong>去嵌入矩阵（Unembedding Matrix）</strong> 相乘，映射到包含所有 <strong>【预设词汇库】</strong> （想象他是一本动态词典）的 50k 的列表</li>
+<li>通过一个函数，<code>softmax</code>，来把列表里面这些值转化成词汇的概率分布</li>
+</ol>
+<p><strong>去嵌入矩阵（Unembedding Matrix）</strong>，为我们的老朋友 <strong>【预设词汇库】</strong> 中的每个单词都分配了一行，每一行包含了与嵌入维度相同数量的元素，被标记为 <code>Wu</code> ，和所有矩阵一样，这个矩阵的初始值是随机的，但在训练过程中，它们会被更新。</p>
+<p><code>softmax</code>：我们希望把最后得到的一串数字，变为代表单词出现的概率，那么这些数字每个都要在0到1之间，并且加起来为1。但是在深度学习的实践中，这些数可能不符合条件（例如值远大于1或者为负数等）。<code>softmax</code>可以把任何一组数字转换成一个有效的分布。当ChatGPT希望调整输出的不稳定性，或者说趣味性时，会涉及到一个参数叫“Temperature”，调整这个“Temperature”其实就是在调整 <code>softmax</code>中的一个t参数，t越大，原本在概率分布中占比较小的数值，就会获得更高的权重。</p>
+<h2 id="总结">总结</h2>
+<p>这篇文章探讨了GPT-3模型是如何借助嵌入矩阵和去嵌入矩阵来处理和生成语言的。它深入揭示了模型中1750亿个权重参数如何分布于28,000个矩阵中，并详细讲述了这些矩阵中的8个类别，尤其是嵌入矩阵和去嵌入矩阵的构造和作用。</p>
+<p>记住这些精华点：</p>
+<ol>
+<li>嵌入矩阵负责将单词转换为向量，这些向量能够在多维空间中表征词语的语义，并通过点积揭示向量间的相似性或区别。</li>
+<li>GPT-3的嵌入矩阵拥有超过6亿个权重，映射了50,257个词汇和12,288维度的向量空间。<br>
+去嵌入矩阵的作用是将上下文中的信息映射回预设词汇库，生成下一个词的概率分布，这是GPT-3生成连贯文本的重要环节。</li>
+<li>重要的softmax函数，将一串数值转换成概率分布，是确定最终输出单词的关键。</li>
+</ol>
+<p>通过嵌入和去嵌入矩阵，GPT-3模型将零散的单词赋予了上下文的意义，并且通过复杂的计算过程预测下一个合适的词汇。在深度学习的世界里，这些矩阵和函数扮演着构筑语言理解和生成的基石角色。下一篇我们将介绍Attention is All You Need 中的“Attention”——注意力块。</p>
+
+        </div>
+        <!-- Share to Twitter, Weibo, Telegram -->
+        <div class="flex items-center">
+          <div class="mr-4 flex items-center">
+            <i class="ri-share-forward-line text-gray-500"></i>
+          </div>
+          <div class="px-4 cursor-pointer text-blue-500 hover:bg-blue-100 dark:hover:bg-gray-600 inline-flex" @click="shareToTwitter">
+            <i class="ri-twitter-line"></i>
+          </div>
+          <div class="px-4 cursor-pointer text-red-500 hover:bg-red-100 dark:hover:bg-gray-600 inline-flex" @click="shareToWeibo">
+            <i class="ri-weibo-line"></i>
+          </div>
+          <div class="px-4 cursor-pointer text-indigo-500 hover:bg-indigo-100 dark:hover:bg-gray-600 inline-flex" @click="shareToTelegram">
+            <i class="ri-telegram-line"></i>
+          </div>
+        </div>
+      </div>
+
+      
+        
+          <div id="gitalk-container"></div>
+        
+
+        
+      
+
+      
+
+      <footer class="py-12 text-center px-4 md:px-0" v-pre>
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+</footer>
+    </div>
+
+    <!-- TOC Container -->
+    <div class="fixed right-0 bottom-0 mb-16 mr-4 shadow w-8 h-8 rounded-full flex justify-center items-center z-10 cursor-pointer bg-white dark:bg-gray-500 dark:text-gray-200 hover:shadow-lg transition-all animated fadeInRight" @click="showToc = true">
+      <i class="ri-file-list-line"></i>
+    </div>
+
+    <div class="fixed right-0 top-0 bottom-0 overflow-y-auto w-64 bg-white dark:bg-gray-800 p-4 border-l border-gray-100 dark:border-gray-600 z-10 transition-fast" :class="{ '-mr-64': !showToc }">
+      <div class="flex mb-4 justify-end">
+        <div class="w-8 h-8 inline-flex justify-center items-center rounded-full cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-600 transition-fast" @click="showToc = false">
+          <i class="ri-close-line text-lg"></i>
+        </div>
+      </div>
+      <div class="post-toc-container">
+        <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#%E4%B8%80-%E5%B5%8C%E5%85%A5%E7%9F%A9%E9%98%B5embedding-matrix-%E5%8F%82%E6%95%B0-617558016">一、嵌入矩阵（Embedding matrix）-- 参数 617,558,016</a></li>
+<li><a href="#%E4%BA%8C-%E5%8E%BB%E5%B5%8C%E5%85%A5%E7%9F%A9%E9%98%B5unembedding-matrix-%E5%8F%82%E6%95%B0-617558016-%E5%92%8C%E5%B5%8C%E5%85%A5%E7%9F%A9%E9%98%B5%E7%9B%B8%E5%90%8C">二、去嵌入矩阵（Unembedding Matrix）-- 参数 617,558,016 （和嵌入矩阵相同）</a></li>
+</ul>
+</li>
+<li><a href="#%E6%80%BB%E7%BB%93">总结</a></li>
+</ul>
+</li>
+</ul>
+
+      </div>
+    </div>
+
+    <!-- Back to top -->
+    <div class="fixed right-0 bottom-0 mb-4 mr-4 shadow w-8 h-8 rounded-full flex justify-center items-center z-10 cursor-pointer bg-white hover:shadow-lg transition-all dark:bg-gray-500 dark:text-gray-200" @click="backToUp" v-show="scrolled">
+      <i class="ri-arrow-up-line"></i>
+    </div>
+  </div>
+
+  <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+  <!-- Background of PhotoSwipe. 
+        It's a separate element as animating opacity is faster than rgba(). -->
+  <div class="pswp__bg">
+  </div>
+  <!-- Slides wrapper with overflow:hidden. -->
+  <div class="pswp__scroll-wrap">
+    <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+    <div class="pswp__container">
+      <div class="pswp__item">
+      </div>
+      <div class="pswp__item">
+      </div>
+      <div class="pswp__item">
+      </div>
+    </div>
+    <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+    <div class="pswp__ui pswp__ui--hidden">
+      <div class="pswp__top-bar">
+        <!--  Controls are self-explanatory. Order can be changed. -->
+        <div class="pswp__counter">
+        </div>
+        <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+        <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+        <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+        <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+        <!-- element will get class pswp__preloader--active when preloader is running -->
+        <div class="pswp__preloader">
+          <div class="pswp__preloader__icn">
+            <div class="pswp__preloader__cut">
+              <div class="pswp__preloader__donut">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+        <div class="pswp__share-tooltip">
+        </div>
+      </div>
+      <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+      </button>
+      <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+      </button>
+      <div class="pswp__caption">
+        <div class="pswp__caption__center">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://creeep123.github.io/media/scripts/main.js"></script>
+  
+  <!-- Code Highlight -->
+  
+
+  <script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+  <script>
+    //拿到预览框架，也就是上面的html代码
+    var pswpElement = document.querySelectorAll('.pswp')[0];
+    //定义图片数组变量
+    var imgitems;
+    /**
+    * 用于显示预览界面
+    * @param index 图片数组下标
+    */
+    function viewImg(index) {
+      //其它选项这里不做过多阐述，详情见官网
+      var pswpoptions = {
+        index: parseInt(index, 10), // 开始幻灯片索引。0是第一张幻灯片。必须是整数，而不是字符串。
+        bgOpacity: 0.7, // 背景透明度，0-1
+        maxSpreadZoom: 3, // 缩放级别，不要太大
+      };
+      //初始化并打开PhotoSwipe，pswpElement对应上面预览框架，PhotoSwipeUI_Default为皮肤，imgitems为图片数组，pswpoptions为选项
+      var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, imgitems, pswpoptions);
+      gallery.init()
+    }
+    /**
+    * 用于添加图片点击事件
+    * @param img 图片元素
+    * @param index 所属下标（在imgitems中的位置）
+    */
+    function addImgClick(img, index) {
+      img.onclick = function() {
+        viewImg(index)
+      }
+    }
+    /**
+    * 轮询所有图片，获取src、width、height等数据，加入imgitems，并给图片元素添加事件
+    * 最好在onload中执行该方法，本站因放在最底部，所以直接初始化
+    * 异步加载图片可在图片元素创建完成后调用此方法
+    */
+    function initImg() {
+      //重置图片数组
+      imgitems = [];
+      //查找class:markdown 下的所有img元素并遍历
+      var imgs = document.querySelectorAll('.markdown img');
+      for (var i = 0; i < imgs.length; i++) {
+        var img = imgs[i];
+        //本站相册初始为loading图片，真实图片放在data-src
+        var ds = img.getAttribute("data-src");
+        //创建image对象，用于获取图片宽高
+        var imgtemp = new Image();
+        //判断是否存在data-src
+        if (ds != null && ds.length > 0) {
+          imgtemp.src = ds
+        } else {
+          imgtemp.src = img.src
+        }
+        //判断是否存在缓存
+        if (imgtemp.complete) {
+          var imgobj = {
+            "src": imgtemp.src,
+            "w": imgtemp.width,
+            "h": imgtemp.height,
+          };
+          imgitems[i] = imgobj;
+          addImgClick(img, i);
+        } else {
+          console.log('进来了2')
+          imgtemp.index = i;
+          imgtemp.img = img;
+          imgtemp.onload = function() {
+            var imgobj = {
+              "src": this.src,
+              "w": this.width,
+              "h": this.height,
+            };
+            //不要使用push，因为onload前后顺序会不同
+            imgitems[this.index] = imgobj
+            //添加点击事件
+            addImgClick(this.img, this.index);
+          }
+        }
+      }
+    }
+    //初始化
+    initImg();
+  </script>
+  
+  
+    
+      <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script type="application/javascript" src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<script type="application/javascript">
+
+  var gitalk = new Gitalk({
+    clientID: '8cdbd17e1bbd6f3605c7',
+    clientSecret: '17a17aba1754d3986900e3b58892da8d8f903249',
+    repo: 'gitTalkRepo',
+    owner: 'creeep123',
+    admin: ['creeep123'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+    
+  
+</body>
+
+</html>

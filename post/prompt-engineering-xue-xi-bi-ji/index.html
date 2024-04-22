@@ -1,0 +1,470 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Prompt Engineering 学习笔记 - 杨的胸</title>
+<link rel="shortcut icon" href="https://creeep123.github.io/favicon.ico">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.2.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css">
+<link rel="stylesheet" href="https://creeep123.github.io/media/css/tailwind.css">
+<link rel="stylesheet" href="https://creeep123.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="Prompt Engineering 学习笔记 - 杨的胸 - Atom Feed" href="https://creeep123.github.io/atom.xml">
+
+    
+
+  <meta name="description" content="零、概览
+
+
+大语言模型要解决的问题，如总结、问答、分类、扮演、编程和推理。
+提示工程的一些高级技巧，如少样本提示、思维链提示、零样本提示和程序辅助语言模型。
+模型安全的一些挑战和方法，如提示词注入、提示信息泄露和越狱。
+人类反馈强化学习的..." />
+  <meta property="og:title" content="Prompt Engineering 学习笔记 - 杨的胸">
+  <meta property="og:description" content="零、概览
+
+
+大语言模型要解决的问题，如总结、问答、分类、扮演、编程和推理。
+提示工程的一些高级技巧，如少样本提示、思维链提示、零样本提示和程序辅助语言模型。
+模型安全的一些挑战和方法，如提示词注入、提示信息泄露和越狱。
+人类反馈强化学习的..." />
+  <meta property="og:type" content="articles">
+  <meta property="og:url" content="https://creeep123.github.io/post/prompt-engineering-xue-xi-bi-ji/" />
+  <meta property="og:image" content="https://anon-images-1259646676.cos.ap-beijing.myqcloud.com/20230315005606.png">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:width" content="1200">
+  <meta name="twitter:title" content="Prompt Engineering 学习笔记 - 杨的胸">
+  <meta name="twitter:description" content="零、概览
+
+
+大语言模型要解决的问题，如总结、问答、分类、扮演、编程和推理。
+提示工程的一些高级技巧，如少样本提示、思维链提示、零样本提示和程序辅助语言模型。
+模型安全的一些挑战和方法，如提示词注入、提示信息泄露和越狱。
+人类反馈强化学习的...">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://creeep123.github.io/post/prompt-engineering-xue-xi-bi-ji/">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
+ 
+  
+
+  
+</head>
+
+<body>
+  <div class="antialiased flex flex-col min-h-screen" id="app">
+    <a href="https://creeep123.github.io" class="fixed top-0 left-0 mt-4 bg-black text-white dark:text-gray-700 dark:bg-yellow-50 dark:hover:bg-black dark:hover:text-white inline-flex p-2 pl-8 hover:text-gray-700 hover:bg-yellow-50 font-bold z-10 transition-fast animated fadeInLeft">
+      杨的胸
+    </a>
+    <div class="max-w-4xl w-full mx-auto">
+      <div class="shadow-box bg-white dark:bg-gray-600 rounded-lg pt-32 md:pt-64 px-4 md:px-8 pb-8 animated fadeIn mb-8">
+        <h1 class="text-5xl font-semibold leading-normal pb-8 mb-8 border-b-8 border-gray-700">
+          Prompt Engineering 学习笔记
+        </h1>
+        
+          <img src="https://anon-images-1259646676.cos.ap-beijing.myqcloud.com/20230315005606.png" alt="Prompt Engineering 学习笔记" class="block w-full mb-8">
+        
+        <div class="mb-8 flex flex-wrap">
+          <div class="text-gray-400 text-sm mr-4">2023-03-15 · 8 min read</div>
+          
+        </div>
+        <div class="markdown mb-8" v-pre>
+          <h2 id="零-概览">零、概览</h2>
+<blockquote>
+<ul>
+<li>大语言模型要解决的问题，如总结、问答、分类、扮演、编程和推理。</li>
+<li>提示工程的一些高级技巧，如少样本提示、思维链提示、零样本提示和程序辅助语言模型。</li>
+<li>模型安全的一些挑战和方法，如提示词注入、提示信息泄露和越狱。</li>
+<li>人类反馈强化学习的应用，以及未来的方向，如增强型语言模型、语言模型的涌现能力、行动/规划强化学习、多模态提示和图提示。</li>
+</ul>
+</blockquote>
+<blockquote>
+<p>🔑 Key Words<br>
+LLM: Large Language Model 大语言模型<br>
+CoT: Chain of Thought 思维链<br>
+PAL: Program-aided Language Model 程序辅助语言模型</p>
+</blockquote>
+<p>*本文为 <a href="https://youtu.be/dOxUroR57xs">Prompt Engineering Overview</a> 视频学习笔记</p>
+<h2 id="一-大语言模型要解决哪些问题">一、大语言模型要解决哪些问题？</h2>
+<ol>
+<li>Text Summarization 总结</li>
+<li>Question Answering 问答</li>
+<li>Text Classification 分类</li>
+<li>Role Playing 扮演</li>
+</ol>
+<blockquote>
+<p>The following is a conversation with an AIresearchassistant.The assistant tone is technicalandscientific.<br>
+Human: Hello，who are you?<br>
+AI: Greetinq! I am an AI research assistant.How can Ihelp you today?<br>
+Human: Can you tell me about the creation of blackholes?<br>
+AI: <em>Sure! Black holes are reqions of spacetime where thegravitational force is so strong that nothinq, not evenlight, can escape from it. They are created when a verymassive star dies and its core collapses in on itself,forming a sinqularity of infinite density. The intensegravity of the singularity pulls in all the matter andradiation around it, creating the black hole.</em></p>
+</blockquote>
+<ol>
+<li>Code Generation 编程</li>
+<li>Resoning 推理</li>
+</ol>
+<h2 id="二-prompt-engineering-的一些高级技巧">二、 Prompt Engineering 的一些高级技巧</h2>
+<h3 id="1-few-shot-prompts">1. Few-shot Prompts</h3>
+<p>用几个例子（问题+答案）来引导<br>
+Few-shot prompting allows us to provide exemplars inprompts to steer the model towards better performance</p>
+<blockquote>
+<p>The odd numbers in this group add up to an even number: 48，9，15，12.2.1.<br>
+A: The answer is False.<br>
+The odd numbers in this group add up to an even number: 17.<br>
+10，19，4，8，12，24.<br>
+A: The answer is True.<br>
+The odd numbers in this group add up to an even number: 1611，14，4，8，13，24.<br>
+A: <em>The answer is True.</em></p>
+</blockquote>
+<h3 id="2-chain-of-though-cot-prompting">2. Chain-of-Though (CoT) Prompting</h3>
+<p>给出推理的过程（思考链路）来引导<br>
+Prompting can be further improved by instructing themodel to reason about the task when responding<br>
+This is very useful for tasks that requiring reasoningYou can combine it with few-shot prompting to get better resultsYou can also do zero-shot CoT where exemplars are notavailable</p>
+<blockquote>
+<p>The odd numbers in this group add up to an even number: 4,8，9，15，12，2，1.<br>
+A: Adding all the odd numbers (9，15，1) gives 25. The answer is False.<br>
+The odd numbers in this group add up to an even number: 15, 32，5，13，82，7，1.<br>
+A: <em>Adding all the odd numbers (15，5，13，7,1) gives 41. The answer is False</em></p>
+</blockquote>
+<h3 id="3-zero-shot">3. Zero Shot</h3>
+<p>仅用一句话来引导AI思考，而非给出例子<br>
+Involves adding &quot;Let's think step by step&quot; to the originalprompt</p>
+<blockquote>
+<p>I went to the market and bought 10 apples. I gave 2 applesneighbor and 2 to the repairman. I then went and to the bought 5 more apples and ate 1.How many apples did Iremain with?<br>
+<em>11 apples</em></p>
+</blockquote>
+<blockquote>
+<p>I went to the market and bought 10 apples. I gave 2 apples to the neiqhbor and 2 to the repairman.I then went and bought 5 more apples and ate 1. How many apples did Iremain with?<br>
+<strong>Let's think step by step.</strong><br>
+<em>First, you started with 10 apples.You gave away 2 apples to the neighbor and 2 to the repairman, so you had 6 apples left.Then you bought 5 more apples, so now you had 11 apples.you ate l apple, so you would remain with 10Finallyapples.</em></p>
+</blockquote>
+<h3 id="4-program-aided-language-modelpal">4. Program-aided Language Model(PAL)</h3>
+<p>因为 CoT 有的时候还不够，我们可以用自然语言的形式辅助描述一个用编程语言构造的问题，然后让AI给出代码答案，我们再去运行这段代码答案，获得正确的结果。</p>
+<ul>
+<li>Chain-of-thought prompting is a good example of how to steer models to perform better at complex reasoning tasks
+<ul>
+<li>However, sometimes CoT is not enough as it depends only on the generated text from the model</li>
+</ul>
+</li>
+<li>Program-aided language models (PAL) uses an LLM to read problems and generate programs as the intermediate reasoning steps
+<ul>
+<li>It offloads the solution step to a runtime such as Python interpreter</li>
+</ul>
+</li>
+</ul>
+<h3 id="5-react">5.  ReAct</h3>
+<p>ReAct是一个让大型语言模型（LLMs）能够同时进行推理和动作的框架，它可以让模型根据不同的任务生成合理的计划，并与外部资源交互获取更多的信息。</p>
+<p>简单来说：搜索推理过程中无法理解的信息，再讲信息作为prompt喂给模型，接下来继续推理链条，重复步骤直到推理完成。New Bing 使用的就是类似逻辑。</p>
+<ul>
+<li>ReAct is a framework where LLMs are used to generateboth reasoning traces and task-specific actions in aninterleaved manner
+<ul>
+<li>Generating reasoning traces allow the model to induce, track.and update action plans,and even handle exceptions</li>
+<li>The action step allows to interface with and gather informationfrom external sources such as knowledge bases orenvironments.<br>
+ReAct allows LLMs to interact with external tools toretrieve additional information that leads to more reliableand factual responses</li>
+</ul>
+</li>
+</ul>
+<h2 id="三-结论和未来的方向">三、结论和未来的方向</h2>
+<h3 id="1-模型安全-model-safety">1. 模型安全 Model Safety</h3>
+<p>提示工程可以用于提升大语言模型的响应的安全性，降低潜在风险，也有人利用提示词注入来探索 LLM 的脆弱性。<br>
+Prompt engineering can be used not only to improve performance but also the reliability of response from a safety perspective</p>
+<ul>
+<li>Prompt engineering can help identify risky behaviours of LLMs which can help to reduce harmful behaviours and risks that mayarise from language models</li>
+<li>There is also a part of the community performing prompt injection to understand the vulnerability of LLMs</li>
+</ul>
+<h3 id="2-prompt-injection-提示词注入">2. Prompt Injection 提示词注入</h3>
+<p>安全问题同样存在于大语言模型之中。<br>
+Some common issues include:</p>
+<ul>
+<li>Prompt Injection
+<ul>
+<li>注入不受信任的指令，来覆盖原有的对于提示词的引导规则： Prompt injection is used to hijack an LM's output byinjecting an untrusted command that overrides instruction of a prompt</li>
+<li>This could easily happen if you just concatenate your prompt with another user generated prompt</li>
+</ul>
+</li>
+<li>Prompt Leaking
+<ul>
+<li>提示信息泄露的目的是迫使模型吐出有关其自身提示的信息。</li>
+<li>这可能导致敏感的、私人的或保密的信息的泄露。</li>
+<li><img src="https://anon-images-1259646676.cos.ap-beijing.myqcloud.com/20230315002728.png" alt="Examples of prompt leaking" loading="lazy"></li>
+</ul>
+</li>
+<li>Jailbreaking
+<ul>
+<li>越狱是绕过安全审核的提示注入。</li>
+<li>API提供的大语言模型可能被有害提示/攻击绕过。</li>
+<li>模型是静态的，可能有漏洞。</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-人类反馈强化学习-rlhf">3. 人类反馈强化学习 RLHF</h3>
+<p>所谓人类反馈强化，就是结合奖励机制，让人类标注员的反馈来不断纠正大语言模型的输出结果，来使得它的输出结果符合人类的主流偏好。</p>
+<ul>
+<li>Reinforcement Learning from Human Feedback (RLHF)is now being used to train LLMs that fit human preference</li>
+<li>RLHF involves collecting high-quality prompt datasets</li>
+</ul>
+<p>一个例子，ChatGPT 是如何通过 RLHF 来优化模型的：<br>
+<img src="https://anon-images-1259646676.cos.ap-beijing.myqcloud.com/20230315002855.png" alt="ChatGPT" loading="lazy"></p>
+<h3 id="4-未来的方向-future-direction">4. 未来的方向 Future direction</h3>
+<ul>
+<li>Augmented LMs - 增强型语言模型</li>
+<li>Emergent ability of LMs - 语言模型的涌现能力</li>
+<li>Acting / Planning - Reinforcement Learning - 行动/规划 - 强化学习</li>
+<li>Multimodal Prompting - 多模态提示</li>
+<li>Graph Prompting - 图提示</li>
+</ul>
+
+        </div>
+        <!-- Share to Twitter, Weibo, Telegram -->
+        <div class="flex items-center">
+          <div class="mr-4 flex items-center">
+            <i class="ri-share-forward-line text-gray-500"></i>
+          </div>
+          <div class="px-4 cursor-pointer text-blue-500 hover:bg-blue-100 dark:hover:bg-gray-600 inline-flex" @click="shareToTwitter">
+            <i class="ri-twitter-line"></i>
+          </div>
+          <div class="px-4 cursor-pointer text-red-500 hover:bg-red-100 dark:hover:bg-gray-600 inline-flex" @click="shareToWeibo">
+            <i class="ri-weibo-line"></i>
+          </div>
+          <div class="px-4 cursor-pointer text-indigo-500 hover:bg-indigo-100 dark:hover:bg-gray-600 inline-flex" @click="shareToTelegram">
+            <i class="ri-telegram-line"></i>
+          </div>
+        </div>
+      </div>
+
+      
+        
+          <div id="gitalk-container"></div>
+        
+
+        
+      
+
+      
+
+      <footer class="py-12 text-center px-4 md:px-0" v-pre>
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+</footer>
+    </div>
+
+    <!-- TOC Container -->
+    <div class="fixed right-0 bottom-0 mb-16 mr-4 shadow w-8 h-8 rounded-full flex justify-center items-center z-10 cursor-pointer bg-white dark:bg-gray-500 dark:text-gray-200 hover:shadow-lg transition-all animated fadeInRight" @click="showToc = true">
+      <i class="ri-file-list-line"></i>
+    </div>
+
+    <div class="fixed right-0 top-0 bottom-0 overflow-y-auto w-64 bg-white dark:bg-gray-800 p-4 border-l border-gray-100 dark:border-gray-600 z-10 transition-fast" :class="{ '-mr-64': !showToc }">
+      <div class="flex mb-4 justify-end">
+        <div class="w-8 h-8 inline-flex justify-center items-center rounded-full cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-600 transition-fast" @click="showToc = false">
+          <i class="ri-close-line text-lg"></i>
+        </div>
+      </div>
+      <div class="post-toc-container">
+        <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#%E9%9B%B6-%E6%A6%82%E8%A7%88">零、概览</a></li>
+<li><a href="#%E4%B8%80-%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E8%A6%81%E8%A7%A3%E5%86%B3%E5%93%AA%E4%BA%9B%E9%97%AE%E9%A2%98">一、大语言模型要解决哪些问题？</a></li>
+<li><a href="#%E4%BA%8C-prompt-engineering-%E7%9A%84%E4%B8%80%E4%BA%9B%E9%AB%98%E7%BA%A7%E6%8A%80%E5%B7%A7">二、 Prompt Engineering 的一些高级技巧</a>
+<ul>
+<li><a href="#1-few-shot-prompts">1. Few-shot Prompts</a></li>
+<li><a href="#2-chain-of-though-cot-prompting">2. Chain-of-Though (CoT) Prompting</a></li>
+<li><a href="#3-zero-shot">3. Zero Shot</a></li>
+<li><a href="#4-program-aided-language-modelpal">4. Program-aided Language Model(PAL)</a></li>
+<li><a href="#5-react">5.  ReAct</a></li>
+</ul>
+</li>
+<li><a href="#%E4%B8%89-%E7%BB%93%E8%AE%BA%E5%92%8C%E6%9C%AA%E6%9D%A5%E7%9A%84%E6%96%B9%E5%90%91">三、结论和未来的方向</a>
+<ul>
+<li><a href="#1-%E6%A8%A1%E5%9E%8B%E5%AE%89%E5%85%A8-model-safety">1. 模型安全 Model Safety</a></li>
+<li><a href="#2-prompt-injection-%E6%8F%90%E7%A4%BA%E8%AF%8D%E6%B3%A8%E5%85%A5">2. Prompt Injection 提示词注入</a></li>
+<li><a href="#3-%E4%BA%BA%E7%B1%BB%E5%8F%8D%E9%A6%88%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0-rlhf">3. 人类反馈强化学习 RLHF</a></li>
+<li><a href="#4-%E6%9C%AA%E6%9D%A5%E7%9A%84%E6%96%B9%E5%90%91-future-direction">4. 未来的方向 Future direction</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+      </div>
+    </div>
+
+    <!-- Back to top -->
+    <div class="fixed right-0 bottom-0 mb-4 mr-4 shadow w-8 h-8 rounded-full flex justify-center items-center z-10 cursor-pointer bg-white hover:shadow-lg transition-all dark:bg-gray-500 dark:text-gray-200" @click="backToUp" v-show="scrolled">
+      <i class="ri-arrow-up-line"></i>
+    </div>
+  </div>
+
+  <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+  <!-- Background of PhotoSwipe. 
+        It's a separate element as animating opacity is faster than rgba(). -->
+  <div class="pswp__bg">
+  </div>
+  <!-- Slides wrapper with overflow:hidden. -->
+  <div class="pswp__scroll-wrap">
+    <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+    <div class="pswp__container">
+      <div class="pswp__item">
+      </div>
+      <div class="pswp__item">
+      </div>
+      <div class="pswp__item">
+      </div>
+    </div>
+    <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+    <div class="pswp__ui pswp__ui--hidden">
+      <div class="pswp__top-bar">
+        <!--  Controls are self-explanatory. Order can be changed. -->
+        <div class="pswp__counter">
+        </div>
+        <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+        <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+        <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+        <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+        <!-- element will get class pswp__preloader--active when preloader is running -->
+        <div class="pswp__preloader">
+          <div class="pswp__preloader__icn">
+            <div class="pswp__preloader__cut">
+              <div class="pswp__preloader__donut">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+        <div class="pswp__share-tooltip">
+        </div>
+      </div>
+      <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+      </button>
+      <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+      </button>
+      <div class="pswp__caption">
+        <div class="pswp__caption__center">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://creeep123.github.io/media/scripts/main.js"></script>
+  
+  <!-- Code Highlight -->
+  
+
+  <script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+  <script>
+    //拿到预览框架，也就是上面的html代码
+    var pswpElement = document.querySelectorAll('.pswp')[0];
+    //定义图片数组变量
+    var imgitems;
+    /**
+    * 用于显示预览界面
+    * @param index 图片数组下标
+    */
+    function viewImg(index) {
+      //其它选项这里不做过多阐述，详情见官网
+      var pswpoptions = {
+        index: parseInt(index, 10), // 开始幻灯片索引。0是第一张幻灯片。必须是整数，而不是字符串。
+        bgOpacity: 0.7, // 背景透明度，0-1
+        maxSpreadZoom: 3, // 缩放级别，不要太大
+      };
+      //初始化并打开PhotoSwipe，pswpElement对应上面预览框架，PhotoSwipeUI_Default为皮肤，imgitems为图片数组，pswpoptions为选项
+      var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, imgitems, pswpoptions);
+      gallery.init()
+    }
+    /**
+    * 用于添加图片点击事件
+    * @param img 图片元素
+    * @param index 所属下标（在imgitems中的位置）
+    */
+    function addImgClick(img, index) {
+      img.onclick = function() {
+        viewImg(index)
+      }
+    }
+    /**
+    * 轮询所有图片，获取src、width、height等数据，加入imgitems，并给图片元素添加事件
+    * 最好在onload中执行该方法，本站因放在最底部，所以直接初始化
+    * 异步加载图片可在图片元素创建完成后调用此方法
+    */
+    function initImg() {
+      //重置图片数组
+      imgitems = [];
+      //查找class:markdown 下的所有img元素并遍历
+      var imgs = document.querySelectorAll('.markdown img');
+      for (var i = 0; i < imgs.length; i++) {
+        var img = imgs[i];
+        //本站相册初始为loading图片，真实图片放在data-src
+        var ds = img.getAttribute("data-src");
+        //创建image对象，用于获取图片宽高
+        var imgtemp = new Image();
+        //判断是否存在data-src
+        if (ds != null && ds.length > 0) {
+          imgtemp.src = ds
+        } else {
+          imgtemp.src = img.src
+        }
+        //判断是否存在缓存
+        if (imgtemp.complete) {
+          var imgobj = {
+            "src": imgtemp.src,
+            "w": imgtemp.width,
+            "h": imgtemp.height,
+          };
+          imgitems[i] = imgobj;
+          addImgClick(img, i);
+        } else {
+          console.log('进来了2')
+          imgtemp.index = i;
+          imgtemp.img = img;
+          imgtemp.onload = function() {
+            var imgobj = {
+              "src": this.src,
+              "w": this.width,
+              "h": this.height,
+            };
+            //不要使用push，因为onload前后顺序会不同
+            imgitems[this.index] = imgobj
+            //添加点击事件
+            addImgClick(this.img, this.index);
+          }
+        }
+      }
+    }
+    //初始化
+    initImg();
+  </script>
+  
+  
+    
+      <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script type="application/javascript" src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<script type="application/javascript">
+
+  var gitalk = new Gitalk({
+    clientID: '8cdbd17e1bbd6f3605c7',
+    clientSecret: '17a17aba1754d3986900e3b58892da8d8f903249',
+    repo: 'gitTalkRepo',
+    owner: 'creeep123',
+    admin: ['creeep123'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+    
+  
+</body>
+
+</html>

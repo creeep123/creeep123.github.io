@@ -1,0 +1,487 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>如何使用 JavaScript 扁平化数组？ - 杨的胸</title>
+<link rel="shortcut icon" href="https://creeep123.github.io/favicon.ico">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.2.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css">
+<link rel="stylesheet" href="https://creeep123.github.io/media/css/tailwind.css">
+<link rel="stylesheet" href="https://creeep123.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="如何使用 JavaScript 扁平化数组？ - 杨的胸 - Atom Feed" href="https://creeep123.github.io/atom.xml">
+
+    
+
+  <meta name="description" content="「如何」系列第三篇，分享了6个JS扁平化数组的方法，总结了3个核心思想。
+
+一、数组扁平化
+数组扁平化就是将多维数组转化为一维数组：
+let arr = [1, [2, 3, [4, 5]]]  ——&amp;gt;  [1, 2, 3, 4, 5..." />
+  <meta property="og:title" content="如何使用 JavaScript 扁平化数组？ - 杨的胸">
+  <meta property="og:description" content="「如何」系列第三篇，分享了6个JS扁平化数组的方法，总结了3个核心思想。
+
+一、数组扁平化
+数组扁平化就是将多维数组转化为一维数组：
+let arr = [1, [2, 3, [4, 5]]]  ——&amp;gt;  [1, 2, 3, 4, 5..." />
+  <meta property="og:type" content="articles">
+  <meta property="og:url" content="https://creeep123.github.io/post/ru-he-shi-yong-javascript-bian-ping-hua-shu-zu/" />
+  <meta property="og:image" content="https://creeep123.github.io/images/avatar.png">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:width" content="1200">
+  <meta name="twitter:title" content="如何使用 JavaScript 扁平化数组？ - 杨的胸">
+  <meta name="twitter:description" content="「如何」系列第三篇，分享了6个JS扁平化数组的方法，总结了3个核心思想。
+
+一、数组扁平化
+数组扁平化就是将多维数组转化为一维数组：
+let arr = [1, [2, 3, [4, 5]]]  ——&amp;gt;  [1, 2, 3, 4, 5...">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://creeep123.github.io/post/ru-he-shi-yong-javascript-bian-ping-hua-shu-zu/">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
+ 
+  
+
+  
+</head>
+
+<body>
+  <div class="antialiased flex flex-col min-h-screen" id="app">
+    <a href="https://creeep123.github.io" class="fixed top-0 left-0 mt-4 bg-black text-white dark:text-gray-700 dark:bg-yellow-50 dark:hover:bg-black dark:hover:text-white inline-flex p-2 pl-8 hover:text-gray-700 hover:bg-yellow-50 font-bold z-10 transition-fast animated fadeInLeft">
+      杨的胸
+    </a>
+    <div class="max-w-4xl w-full mx-auto">
+      <div class="shadow-box bg-white dark:bg-gray-600 rounded-lg pt-32 md:pt-64 px-4 md:px-8 pb-8 animated fadeIn mb-8">
+        <h1 class="text-5xl font-semibold leading-normal pb-8 mb-8 border-b-8 border-gray-700">
+          如何使用 JavaScript 扁平化数组？
+        </h1>
+        
+        <div class="mb-8 flex flex-wrap">
+          <div class="text-gray-400 text-sm mr-4">2021-06-08 · 6 min read</div>
+          
+            <a href="https://creeep123.github.io/tag/javaScript/" class="text-gray-700 text-sm border-b-2 border-dotted border-gray-200 hover:border-gray-600 transition-all duration-100 inline-flex mr-2">
+              <i class="ri-hashtag"></i>
+              javaScript
+            </a>
+          
+            <a href="https://creeep123.github.io/tag/how/" class="text-gray-700 text-sm border-b-2 border-dotted border-gray-200 hover:border-gray-600 transition-all duration-100 inline-flex mr-2">
+              <i class="ri-hashtag"></i>
+              「如何」
+            </a>
+          
+        </div>
+        <div class="markdown mb-8" v-pre>
+          <p>「如何」系列第三篇，分享了6个JS扁平化数组的方法，总结了3个核心思想。</p>
+<!-- more -->
+<h1 id="一-数组扁平化">一、数组扁平化</h1>
+<p>数组扁平化就是将多维数组转化为一维数组：</p>
+<pre><code class="language-javascript">let arr = [1, [2, 3, [4, 5]]]  ——&gt;  [1, 2, 3, 4, 5]
+</code></pre>
+<h2 id="11-tostring-split">1.1  <code>toString </code>+ <code>split</code></h2>
+<p>先将数组转化为字符串，再使用split将字符串转化为数组：</p>
+<pre><code class="language-javascript">let arr = [1, [2, 3, [4, 5]]]
+function flatten(arr) {
+    return arr.toString().split(',')
+}
+console.log(flatten(arr)) 
+</code></pre>
+<p>用split形成的数组的每个元素仍然是字符串，需要将其转化为数字</p>
+<p><strong>缺陷</strong>：若元素为字符串且包含「 , 」，则 <code>split </code>方法不能正确分割。</p>
+<h2 id="12-reduce">1.2 <code>reduce</code></h2>
+<p>reduce方法会对根据回调函数对数组的每个元素进行操作：</p>
+<pre><code class="language-javascript">let arr = [1, [2, 3, [4, 5]]] 
+const newArr = function(arr){
+  return arr.reduce((pre,cur)=&gt;pre.concat(Array.isArray(cur)?newArr(cur):cur),[])
+}
+console.log(newArr(arr)); 
+</code></pre>
+<p>更多<code>reduce()</code>方法的使用：<a href="https://blog.csdn.net/qq_42033567/article/details/107902216">《数组reduce()方法的妙用》</a></p>
+<h2 id="13-joinsplit">1.3 <code>join</code>+<code>split</code></h2>
+<p><code>join()</code>方法和上面的<code>toString</code>方法类似，都能将数组转化为字符串</p>
+<pre><code class="language-javascript">let arr = [1, [2, 3, [4, 5]]] 
+function flatten(arr) {
+    return arr.join(',').split(',')
+}
+</code></pre>
+<p><strong>注意</strong>：若被扁平化的数组由<strong>数字</strong>构成，<code>join</code>在扁平化数组的同时，使用传入的第一个参数作为分隔符，输出的是扁平化后的数组字符串，所以需要先用<code>split</code>切分转为字符串数组，再对每个元素进行转数字操作。</p>
+<h2 id="14-递归-循环">1.4 递归 + 循环</h2>
+<pre><code class="language-js">function myFlat(arr){
+    let res = []
+    arr.map(item=&gt;{
+        if(Array.isArray(item)){
+            res = res.concat(myFlat(item))
+        } else {
+            res.push(item)
+        }
+    })
+    return res
+}
+</code></pre>
+<h2 id="15-拓展运算符">1.5 拓展运算符</h2>
+<p>对数组进行多次判断，若有任意元素是数组，则使用<code>...</code>将其解构一次，反复执行以上过程，直至数组扁平化完成。</p>
+<blockquote>
+<ul>
+<li>
+<p><code>Array.some</code>返回一个<code>Boolean </code>值，表示数组中是否有任一元素通过测试函数</p>
+</li>
+<li>
+<p><code>...</code>扩展运算符可以取出参数的所有的可以遍历的对象，并拷贝到当前的对象中</p>
+</li>
+</ul>
+</blockquote>
+<pre><code class="language-javascript">let arr = [1, [2, 3, [4, 5]]] 
+function myFlat(arr) {
+    while (arr.some(item =&gt; Array.isArray(item))) {
+        arr = [].concat(...arr);
+    }
+    return arr;
+}
+console.log(myFlat(arr)); 
+</code></pre>
+<h2 id="16-flat">1.6 <code>flat</code></h2>
+<p><code>flat()</code>是 ES6 中的一个数组方法，该方法会按照一个可指定的深度depth递归遍历数组，并将所有元素与遍历到的子数组中的元素合并为一个新数组返回。</p>
+<p>语法： <code>let newArray = arr.flat(depth)</code></p>
+<p><strong>注意：</strong></p>
+<ul>
+<li>该方法不会改变原数组</li>
+<li><code>depth</code>为指定要提取嵌套数组的结构深度，默认值为 1</li>
+<li><code>flat()</code> 方法会移除数组中的空项</li>
+</ul>
+<pre><code class="language-js">let arr1 = [1, 2, [3, 4]];
+arr1.flat(); 
+//[1, 2, 3, 4]
+
+let arr2 = [1, 2, [3, 4, [5, 6]]];
+arr2.flat(1); 
+// [1, 2, 3, 4, [5,6]]
+
+let arr3 = [1, 2, [3, 4, [5, 6]]];
+arr3.flat(2); 
+// [1, 2, 3, 4, 5, 6]
+
+
+let arr4 = [1, 2, [3, 4, [5, 6]]]
+arr4.flat(Infinity); 
+//[1,2,3,4,5,6]
+
+let arr5 = [1, 2, , 4, 5];
+arr5.flat(); 
+//[1,2,4,5]
+</code></pre>
+<h1 id="二-归纳">二、归纳</h1>
+<p>数组扁平化方法的核心思想，我总结了以下三种</p>
+<h2 id="21-层次思想">2.1 层次思想</h2>
+<p>分别实现两个方法</p>
+<ul>
+<li>
+<p>浅扁平化方法：只扁平化一层数组</p>
+<p>例如：</p>
+<pre><code class="language-js">function shallowFlatten(arr) {
+  return [].concat(...arr)
+}
+</code></pre>
+</li>
+<li>
+<p>深扁平化方法：<strong>迭代</strong>执行浅扁平化方法</p>
+<pre><code class="language-jsx">function deepFlatten(arr,deepth){
+  let result = arr
+  while(n--){
+    result = shallowFlatten(result)
+  }
+  return result 
+}
+</code></pre>
+<p>使用方法和<code>flat</code>类似</p>
+<pre><code class="language-js">let arr = [1, [2, 3, [4, 5]]]
+deepFlatten(arr,1)
+//[1,,2,3,[4,5]]
+deepFlatten(arr,2)
+//[1,2,3,4,5]
+</code></pre>
+</li>
+</ul>
+<p>上文提到的 <code>1.5 拓展运算符</code> 使用了这种思想。</p>
+<h2 id="22-递归思想">2.2 递归思想</h2>
+<p><code>1.2 reduce</code>、<code>1.4 递归 + 循环</code>都是递归思想的不同实现，根据数组方法的使用差异，还可以有更多种实现，篇幅有限，不一一列举。</p>
+<p>这里用<code>1.2 reduce</code>作为例子描述一下递归的核心思想：</p>
+<pre><code class="language-js">function myFlat(arr){
+    //定义一个临时数组 res
+    let res = []
+    //循环遍历原数组
+    arr.map(item =&gt;{
+        if(Array.isArray(item)){//若当前元素是数组
+            //递归使用myFlat方法展开此数组，将返回值和此数组拼接
+            res = res.concat(myFlat(item))
+        } else {//若当前元素不是数组，则已经访问到最底层
+            //将此非数组元素塞入 res 尾部
+            res.push(item)
+        }
+    })
+    //返回临时数组
+    return res
+}
+</code></pre>
+<h2 id="23-降维打击">2.3 降维打击</h2>
+<p><code>1.1  toString + spli</code> 、<code>1.3 join+split</code>属于奇淫巧计，管你原来在第几层，我直接把你拉到第一层：转成字符串，之后再复原成数组。不过这个方法有个缺点，就是原来的空数组转的<strong>空字符串</strong>也会被放入新生成的数组里去。如果不需要空字符串元素，就需要对结果进行过滤。</p>
+<p>除了直接调用它的 <code>toString </code>方法之外，还可以用隐式转换间接调用：</p>
+<pre><code class="language-jsx">function flatten(arr){
+    return (arr + '').split(',')
+}
+</code></pre>
+<h1 id="三-最后">三、最后</h1>
+<p>实际项目中需要使用的话，<code>flat</code>是代码量最小最直接的一种方法；遇上面试考察当然是多多益善。如果考虑到性能，我个人理解<strong>降维打击思想</strong>在理论上性能最好。下一篇文章将和各位一同学习<strong>对象扁平化</strong>。</p>
+<p><em><strong>参考：</strong></em></p>
+<p><a href="https://www.cnblogs.com/mengfangui/p/9485703.html">js 数组扁平化</a></p>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce">Array.prototype.reduce()</a></p>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/some">Array.prototype.some()</a></p>
+<p><a href="https://www.jianshu.com/p/b1fb3434e1f5">JS 扁平化（flatten） 数组</a></p>
+
+        </div>
+        <!-- Share to Twitter, Weibo, Telegram -->
+        <div class="flex items-center">
+          <div class="mr-4 flex items-center">
+            <i class="ri-share-forward-line text-gray-500"></i>
+          </div>
+          <div class="px-4 cursor-pointer text-blue-500 hover:bg-blue-100 dark:hover:bg-gray-600 inline-flex" @click="shareToTwitter">
+            <i class="ri-twitter-line"></i>
+          </div>
+          <div class="px-4 cursor-pointer text-red-500 hover:bg-red-100 dark:hover:bg-gray-600 inline-flex" @click="shareToWeibo">
+            <i class="ri-weibo-line"></i>
+          </div>
+          <div class="px-4 cursor-pointer text-indigo-500 hover:bg-indigo-100 dark:hover:bg-gray-600 inline-flex" @click="shareToTelegram">
+            <i class="ri-telegram-line"></i>
+          </div>
+        </div>
+      </div>
+
+      
+        
+          <div id="gitalk-container"></div>
+        
+
+        
+      
+
+      
+
+      <footer class="py-12 text-center px-4 md:px-0" v-pre>
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+</footer>
+    </div>
+
+    <!-- TOC Container -->
+    <div class="fixed right-0 bottom-0 mb-16 mr-4 shadow w-8 h-8 rounded-full flex justify-center items-center z-10 cursor-pointer bg-white dark:bg-gray-500 dark:text-gray-200 hover:shadow-lg transition-all animated fadeInRight" @click="showToc = true">
+      <i class="ri-file-list-line"></i>
+    </div>
+
+    <div class="fixed right-0 top-0 bottom-0 overflow-y-auto w-64 bg-white dark:bg-gray-800 p-4 border-l border-gray-100 dark:border-gray-600 z-10 transition-fast" :class="{ '-mr-64': !showToc }">
+      <div class="flex mb-4 justify-end">
+        <div class="w-8 h-8 inline-flex justify-center items-center rounded-full cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-600 transition-fast" @click="showToc = false">
+          <i class="ri-close-line text-lg"></i>
+        </div>
+      </div>
+      <div class="post-toc-container">
+        <ul class="markdownIt-TOC">
+<li><a href="#%E4%B8%80-%E6%95%B0%E7%BB%84%E6%89%81%E5%B9%B3%E5%8C%96">一、数组扁平化</a>
+<ul>
+<li><a href="#11-tostring-split">1.1  <code>toString </code>+ <code>split</code></a></li>
+<li><a href="#12-reduce">1.2 <code>reduce</code></a></li>
+<li><a href="#13-joinsplit">1.3 <code>join</code>+<code>split</code></a></li>
+<li><a href="#14-%E9%80%92%E5%BD%92-%E5%BE%AA%E7%8E%AF">1.4 递归 + 循环</a></li>
+<li><a href="#15-%E6%8B%93%E5%B1%95%E8%BF%90%E7%AE%97%E7%AC%A6">1.5 拓展运算符</a></li>
+<li><a href="#16-flat">1.6 <code>flat</code></a></li>
+</ul>
+</li>
+<li><a href="#%E4%BA%8C-%E5%BD%92%E7%BA%B3">二、归纳</a>
+<ul>
+<li><a href="#21-%E5%B1%82%E6%AC%A1%E6%80%9D%E6%83%B3">2.1 层次思想</a></li>
+<li><a href="#22-%E9%80%92%E5%BD%92%E6%80%9D%E6%83%B3">2.2 递归思想</a></li>
+<li><a href="#23-%E9%99%8D%E7%BB%B4%E6%89%93%E5%87%BB">2.3 降维打击</a></li>
+</ul>
+</li>
+<li><a href="#%E4%B8%89-%E6%9C%80%E5%90%8E">三、最后</a></li>
+</ul>
+
+      </div>
+    </div>
+
+    <!-- Back to top -->
+    <div class="fixed right-0 bottom-0 mb-4 mr-4 shadow w-8 h-8 rounded-full flex justify-center items-center z-10 cursor-pointer bg-white hover:shadow-lg transition-all dark:bg-gray-500 dark:text-gray-200" @click="backToUp" v-show="scrolled">
+      <i class="ri-arrow-up-line"></i>
+    </div>
+  </div>
+
+  <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+  <!-- Background of PhotoSwipe. 
+        It's a separate element as animating opacity is faster than rgba(). -->
+  <div class="pswp__bg">
+  </div>
+  <!-- Slides wrapper with overflow:hidden. -->
+  <div class="pswp__scroll-wrap">
+    <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+    <div class="pswp__container">
+      <div class="pswp__item">
+      </div>
+      <div class="pswp__item">
+      </div>
+      <div class="pswp__item">
+      </div>
+    </div>
+    <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+    <div class="pswp__ui pswp__ui--hidden">
+      <div class="pswp__top-bar">
+        <!--  Controls are self-explanatory. Order can be changed. -->
+        <div class="pswp__counter">
+        </div>
+        <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+        <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+        <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+        <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+        <!-- element will get class pswp__preloader--active when preloader is running -->
+        <div class="pswp__preloader">
+          <div class="pswp__preloader__icn">
+            <div class="pswp__preloader__cut">
+              <div class="pswp__preloader__donut">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+        <div class="pswp__share-tooltip">
+        </div>
+      </div>
+      <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+      </button>
+      <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+      </button>
+      <div class="pswp__caption">
+        <div class="pswp__caption__center">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://creeep123.github.io/media/scripts/main.js"></script>
+  
+  <!-- Code Highlight -->
+  
+
+  <script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+  <script>
+    //拿到预览框架，也就是上面的html代码
+    var pswpElement = document.querySelectorAll('.pswp')[0];
+    //定义图片数组变量
+    var imgitems;
+    /**
+    * 用于显示预览界面
+    * @param index 图片数组下标
+    */
+    function viewImg(index) {
+      //其它选项这里不做过多阐述，详情见官网
+      var pswpoptions = {
+        index: parseInt(index, 10), // 开始幻灯片索引。0是第一张幻灯片。必须是整数，而不是字符串。
+        bgOpacity: 0.7, // 背景透明度，0-1
+        maxSpreadZoom: 3, // 缩放级别，不要太大
+      };
+      //初始化并打开PhotoSwipe，pswpElement对应上面预览框架，PhotoSwipeUI_Default为皮肤，imgitems为图片数组，pswpoptions为选项
+      var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, imgitems, pswpoptions);
+      gallery.init()
+    }
+    /**
+    * 用于添加图片点击事件
+    * @param img 图片元素
+    * @param index 所属下标（在imgitems中的位置）
+    */
+    function addImgClick(img, index) {
+      img.onclick = function() {
+        viewImg(index)
+      }
+    }
+    /**
+    * 轮询所有图片，获取src、width、height等数据，加入imgitems，并给图片元素添加事件
+    * 最好在onload中执行该方法，本站因放在最底部，所以直接初始化
+    * 异步加载图片可在图片元素创建完成后调用此方法
+    */
+    function initImg() {
+      //重置图片数组
+      imgitems = [];
+      //查找class:markdown 下的所有img元素并遍历
+      var imgs = document.querySelectorAll('.markdown img');
+      for (var i = 0; i < imgs.length; i++) {
+        var img = imgs[i];
+        //本站相册初始为loading图片，真实图片放在data-src
+        var ds = img.getAttribute("data-src");
+        //创建image对象，用于获取图片宽高
+        var imgtemp = new Image();
+        //判断是否存在data-src
+        if (ds != null && ds.length > 0) {
+          imgtemp.src = ds
+        } else {
+          imgtemp.src = img.src
+        }
+        //判断是否存在缓存
+        if (imgtemp.complete) {
+          var imgobj = {
+            "src": imgtemp.src,
+            "w": imgtemp.width,
+            "h": imgtemp.height,
+          };
+          imgitems[i] = imgobj;
+          addImgClick(img, i);
+        } else {
+          console.log('进来了2')
+          imgtemp.index = i;
+          imgtemp.img = img;
+          imgtemp.onload = function() {
+            var imgobj = {
+              "src": this.src,
+              "w": this.width,
+              "h": this.height,
+            };
+            //不要使用push，因为onload前后顺序会不同
+            imgitems[this.index] = imgobj
+            //添加点击事件
+            addImgClick(this.img, this.index);
+          }
+        }
+      }
+    }
+    //初始化
+    initImg();
+  </script>
+  
+  
+    
+      <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script type="application/javascript" src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<script type="application/javascript">
+
+  var gitalk = new Gitalk({
+    clientID: '8cdbd17e1bbd6f3605c7',
+    clientSecret: '17a17aba1754d3986900e3b58892da8d8f903249',
+    repo: 'gitTalkRepo',
+    owner: 'creeep123',
+    admin: ['creeep123'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+    
+  
+</body>
+
+</html>
